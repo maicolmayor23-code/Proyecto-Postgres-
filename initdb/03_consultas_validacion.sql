@@ -33,18 +33,16 @@ ORDER BY unidades_vendidas DESC;
 -- ==========================================
 
 SELECT
-    v.vendedor_id,
+    v.venta_id,
+    v.fecha_venta,
     ve.vendedor_nombre,
-    COUNT(DISTINCT v.venta_id) AS cantidad_ventas,
-    SUM((d.cantidad * d.precio_unitario) - d.descuento) AS valor_total
+    c.cliente_nombre
 FROM normalizacion_ventas.ventas v
 JOIN normalizacion_ventas.vendedores ve
     ON v.vendedor_id = ve.vendedor_id
-JOIN normalizacion_ventas.detalle_venta d
-    ON v.venta_id = d.venta_id
-GROUP BY
-    v.vendedor_id,
-    ve.vendedor_nombre;
+JOIN normalizacion_ventas.clientes c
+    ON v.cliente_doc = c.cliente_doc
+WHERE ve.vendedor_id = 'VEN01';
 
 --------------------------------------------------
 
@@ -53,7 +51,6 @@ GROUP BY
 -- ==========================================
 
 SELECT
-    c.cliente_doc,
     c.cliente_nombre,
     v.venta_id,
     v.fecha_venta,
@@ -66,10 +63,7 @@ JOIN normalizacion_ventas.detalle_venta d
     ON v.venta_id = d.venta_id
 JOIN normalizacion_ventas.productos p
     ON d.producto_codigo = p.producto_codigo
-ORDER BY
-    c.cliente_doc,
-    v.fecha_venta;
-
+WHERE c.cliente_doc = 'CC101';
 --------------------------------------------------
 
 -- ==========================================
