@@ -1,67 +1,28 @@
-````markdown
-# 📚 Mini Proyecto - Normalización de Base de Datos para un Sistema de Ventas
+# Mini Proyecto - Normalización de Base de Datos para un Sistema de Ventas
 
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql)
-![SQL](https://img.shields.io/badge/SQL-Normalización-success)
-![Estado](https://img.shields.io/badge/Estado-Completado-brightgreen)
-![Licencia](https://img.shields.io/badge/Licencia-Académico-lightgrey)
+## Autor
 
-Proyecto desarrollado como evidencia de aprendizaje para aplicar las técnicas de **normalización de bases de datos** (1FN, 2FN y 3FN) sobre un sistema de ventas, implementando posteriormente el modelo en PostgreSQL.
+**Nombre:** Mike
 
----
+## Descripción
 
-## 📑 Tabla de contenido
+Este proyecto tiene como objetivo normalizar una base de datos de ventas a partir de una tabla no normalizada (`ventas_crudas`). Para ello se aplicaron la Primera Forma Normal (1FN), Segunda Forma Normal (2FN) y Tercera Forma Normal (3FN), eliminando redundancias, dependencias parciales y dependencias transitivas.
 
-- [Descripción](#-descripción)
-- [Objetivos](#-objetivos)
-- [Tecnologías utilizadas](#-tecnologías-utilizadas)
-- [Estructura del proyecto](#-estructura-del-proyecto)
-- [Modelo implementado](#-modelo-implementado)
-- [Ejecución](#-ejecución)
-- [Consultas de validación](#-consultas-de-validación)
-- [Resultados](#-resultados)
-- [Autor](#-autor)
+El resultado es una base de datos relacional implementada en PostgreSQL, con claves primarias, claves foráneas y restricciones que garantizan la integridad de los datos.
 
 ---
 
-# 📖 Descripción
-
-El proyecto parte de una tabla denominada **ventas_crudas**, la cual presenta problemas de redundancia, datos repetidos y atributos multivaluados.
-
-A partir de ella se realizó el proceso de normalización aplicando:
-
-- Primera Forma Normal (1FN)
-- Segunda Forma Normal (2FN)
-- Tercera Forma Normal (3FN)
-
-Finalmente se implementó el modelo relacional en PostgreSQL y se validó mediante consultas SQL.
-
----
-
-# 🎯 Objetivos
-
-- Analizar una tabla no normalizada.
-- Identificar dependencias funcionales.
-- Aplicar 1FN, 2FN y 3FN.
-- Diseñar un modelo Entidad-Relación.
-- Implementar el modelo en PostgreSQL.
-- Validar el funcionamiento mediante consultas SQL.
-
----
-
-# 🛠 Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - PostgreSQL
 - pgAdmin 4
-- SQL
-- Draw.io (diagrams.net)
-- Git & GitHub
+- diagrams.net (Draw.io) para el diagrama Entidad-Relación
 
 ---
 
-# 📂 Estructura del proyecto
+## Estructura del proyecto
 
-```text
+```
 mini-proyecto-normalizacion-ventas/
 │
 ├── README.md
@@ -73,106 +34,78 @@ mini-proyecto-normalizacion-ventas/
     ├── 01_modelo_normalizado.sql
     ├── 02_datos_normalizados.sql
     └── 03_consultas_validacion.sql
-````
+```
 
 ---
 
-# 🗄 Modelo implementado
-
-El modelo final está compuesto por las siguientes entidades:
-
-* Clientes
-* Vendedores
-* Categorías
-* Productos
-* Ventas
-* Detalle_Venta
-
-El modelo garantiza la integridad referencial mediante claves primarias y claves foráneas.
-
----
-
-# ▶ Ejecución
+## Orden de ejecución
 
 Ejecutar los archivos en el siguiente orden:
 
-### 1️⃣ Tabla original
+1. `00_tabla_cruda.sql`
+   - Crea la tabla original sin normalizar.
+   - Inserta los datos iniciales del caso de estudio.
 
-```sql
-00_tabla_cruda.sql
-```
+2. `01_modelo_normalizado.sql`
+   - Crea el esquema normalizado.
+   - Crea las tablas:
+     - Clientes
+     - Vendedores
+     - Categorías
+     - Productos
+     - Ventas
+     - Detalle_Venta
 
-Crea la tabla original con los datos suministrados en el caso de estudio.
+3. `02_datos_normalizados.sql`
+   - Inserta los datos normalizados.
+   - Evita la duplicación de clientes, vendedores, categorías y productos.
 
----
-
-### 2️⃣ Modelo normalizado
-
-```sql
-01_modelo_normalizado.sql
-```
-
-Crea:
-
-* Schema
-* Tablas
-* Claves primarias
-* Claves foráneas
-* Restricciones
+4. `03_consultas_validacion.sql`
+   - Ejecuta las consultas para verificar el correcto funcionamiento del modelo.
 
 ---
 
-### 3️⃣ Datos normalizados
+## Modelo de datos
 
-```sql
-02_datos_normalizados.sql
-```
+El modelo final está compuesto por las siguientes entidades:
 
-Inserta la información normalizada evitando registros duplicados.
+- Clientes
+- Vendedores
+- Categorías
+- Productos
+- Ventas
+- Detalle_Venta
 
----
-
-### 4️⃣ Validación
-
-```sql
-03_consultas_validacion.sql
-```
-
-Ejecuta las consultas para comprobar el correcto funcionamiento del modelo.
+Las relaciones entre las tablas se implementaron mediante claves foráneas, garantizando la integridad referencial.
 
 ---
 
-# 🔎 Consultas de validación
+## Restricciones implementadas
 
-El proyecto incluye las siguientes consultas:
+Se utilizaron las siguientes restricciones en PostgreSQL:
 
-* Total calculado por cada venta.
-* Productos más vendidos.
-* Ventas realizadas por vendedor.
-* Historial de compras por cliente.
-* Verificación de registros huérfanos.
+- PRIMARY KEY
+- FOREIGN KEY
+- NOT NULL
+- UNIQUE
+- CHECK
 
----
-
-# ✅ Resultados
-
-Con la normalización se logró:
-
-* Eliminar atributos multivaluados.
-* Reducir la redundancia de datos.
-* Eliminar anomalías de inserción, actualización y eliminación.
-* Garantizar la integridad referencial.
-* Obtener un modelo relacional organizado y escalable.
+Estas restricciones ayudan a mantener la consistencia e integridad de la información almacenada.
 
 ---
 
-# 👨‍💻 Autor
+## Consultas de validación
 
-**Maicol Mayor**
+El proyecto incluye las siguientes consultas SQL:
 
-Ingeniería de Software
+- Calcular el total de cada venta a partir del detalle.
+- Identificar los productos más vendidos.
+- Consultar las ventas realizadas por cada vendedor.
+- Consultar el historial de compras por cliente.
+- Verificar que no existan registros huérfanos en la tabla `detalle_venta`.
 
-Proyecto desarrollado con fines académicos.
+---
 
-```
-```
+## Conclusiones
+
+La aplicación de las tres formas normales permitió eliminar redundancias, mejorar la organización de los datos y garantizar la integridad referencial del sistema. El modelo obtenido facilita el mantenimiento de la información y optimiza la ejecución de consultas sobre la base de datos.
