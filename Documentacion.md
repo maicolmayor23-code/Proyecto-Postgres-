@@ -2,7 +2,7 @@
 
 ## Autor
 
-**Nombre:** Mike
+**Nombre:** Maicol Mayor
 
 ## Descripción
 
